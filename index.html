@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmacias de Guardia - Castellón</title>
+
+<style>
+body {
+  font-family: system-ui;
+  margin: 0;
+  padding: 20px;
+  background: #f9fafb;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.meta {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.loader {
+  text-align: center;
+  padding: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>💊 Farmacias de guardia</h2>
+
+<div id="loader" class="loader">Cargando...</div>
+<div id="lista"></div>
+
+<script>
+async function cargar() {
+  try {
+    const res = await fetch("/api/farmacias");
+    const data = await res.json();
+
+    loader.style.display = "none";
+
+    if (!data.farmacias.length) {
+      lista.innerHTML = "No hay farmacias disponibles";
+      return;
+    }
+
+    lista.innerHTML = data.farmacias.map(f => `
+      <div class="card">
+        <b>${f.nombre}</b><br>
+        ${f.direccion}<br>
+        ${f.telefono ? "📞 " + f.telefono : ""}<br>
+        <span class="meta">${f.horario || ""}</span><br>
+        ${f.lat ? `<a href="https://www.google.com/maps?q=${f.lat},${f.lon}" target="_blank">📍 Ver mapa</a>` : ""}
+      </div>
+    `).join("");
+
+  } catch (err) {
+    loader.innerText = "Error cargando datos";
+  }
+}
+
+cargar();
+</script>
+
+</body>
+</html>
