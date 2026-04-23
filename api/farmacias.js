@@ -1,5 +1,10 @@
 export default async function handler(req, res) {
 
+ // ✅ CORS
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
   const URL = "https://datosabiertos.dipcas.es/api/explore/v2.1/catalog/datasets/ubicacion-y-disponibilidad-de-las-farmacias-de-guardia-en-la-provincia-de-castel/records?limit=100";
 
   res.setHeader(
