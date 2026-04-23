@@ -18,8 +18,9 @@ export default async function handler(req, res) {
         e.poblacion?.toLowerCase().includes("castell")
       )
       .map(e => ({
-        nombre: e.nombre,
+        nombre: e.nombre_farmacia || e.nombre || "Farmacia",
         direccion: e.direccion,
+        cp: e.codigo_postal,
         telefono: e.telefono,
         horario: e.horario,
         lat: e.geo_point_2d?.lat,
