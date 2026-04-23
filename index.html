@@ -123,8 +123,8 @@ async function cargar() {
 
           <span class="meta">${f.horario || "Guardia hoy hasta mañana"}</span><br>
 
-          ${f.coordenadas.lat ? `
-            <a href="https://www.google.com/maps?q=${f.coordenadas.lat},${f.coordenadas.lon}" target="_blank">
+          ${f.lat ? `
+            <a href="https://www.google.com/maps?q=${f.lat},${f.lon}" target="_blank">
               📍 Ver mapa
             </a>
           ` : ""}
