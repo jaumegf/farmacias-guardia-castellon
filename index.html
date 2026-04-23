@@ -6,34 +6,34 @@
 <title>Farmàcies de Guàrdia - Castelló</title>
 
 <style>
-body {
+
+.farmacia-app {
   font-family: system-ui;
-  margin: 0;
   padding: 20px;
-  background: #f9fafb;
+   background: #f9fafb;
 }
 
-h2 {
+farmacia-h2 {
   margin-bottom: 15px;
 }
 
-.subtitulo {
+.farmacia-subtitulo {
   margin-bottom: 20px;
 }
 
-.ciudad {
+.farmacia-ciudad {
   font-weight: 600;
   font-size: 1rem;
   color: #111827;
 }
 
-.fecha {
+.farmacia-fecha {
   font-size: 0.85rem;
   color: #6b7280;
   text-transform: capitalize;
 }
 
-.card {
+.farmacia-card {
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
@@ -41,23 +41,23 @@ h2 {
   margin-bottom: 10px;
 }
 
-.meta {
+.farmacia-meta {
   font-size: 0.85rem;
   color: #6b7280;
 }
 
-.loader {
+.farmacia-loader {
   text-align: center;
   padding: 20px;
 }
 
-.tel {
+.farmacia-tel {
   color: #16a34a;
   text-decoration: none;
   font-weight: 600;
 }
 
-.tel:hover {
+.farmacia-tel:hover {
   text-decoration: underline;
 }
 </style>
@@ -65,21 +65,27 @@ h2 {
 
 <body>
 
-<h2>💊 Farmàcies de guàrdia</h2>
-<!-- <div class="subtitulo"> -->
-  <!-- <div class="ciudad">Castellón de la Plana</div> -->
-  <!-- <div class="fecha"></div> -->
-<!-- </div> -->
+	<div class="farmacia-app">
+		<h2>💊 Farmàcies de guàrdia</h2>
+		<!-- <div class="subtitulo"> -->
+		  <!-- <div class="ciudad">Castellón de la Plana</div> -->
+		  <!-- <div class="fecha"></div> -->
+		<!-- </div> -->
 
-<div id="loader">Carregant...</div>
-<div id="lista"></div>
+		<div id="loader">Carregant...</div>
+		<div id="lista"></div>
+	</div>
 
 <script>
 
 async function cargar() {
   try {
-    const res = await fetch("/api/farmacias");
-    const data = await res.json();
+    //const res = await fetch("/api/farmacias");
+	const res = await fetch(
+	  "https://farmacias-guardia-castellon.vercel.app/api/farmacias"
+	);
+  
+   const data = await res.json();
 	
     //console.log("DATA COMPLETA:", data);
     //console.log("TOTAL FARMACIAS:", data.farmacias?.length);
@@ -111,7 +117,7 @@ async function cargar() {
       console.log("RENDER:", f);
 
       return `
-        <div class="card">
+        <div class="farmacia-card">
           <b>${f.nombre || "Farmacia"}</b><br>
           ${f.direccion || ""} ${f.cp ? " - " + f.cp : ""}<br>
 		  ${f.poblacion}<br>
@@ -121,7 +127,7 @@ async function cargar() {
             </a><br>
           ` : ""}
 
-          <span class="meta">${f.horario || "Guardia fins demà"}</span><br>
+          <span class="farmacia-meta">${f.horario || "Guardia fins demà"}</span><br>
 
           ${f.lat ? `
             <a href="https://www.google.com/maps?q=${f.lat},${f.lon}" target="_blank">
