@@ -56,10 +56,14 @@ h2 {
 <div id="lista"></div>
 
 <script>
+
 async function cargar() {
   try {
     const res = await fetch("/api/farmacias");
     const data = await res.json();
+
+    console.log("DATA COMPLETA:", data);
+    console.log("TOTAL FARMACIAS:", data.farmacias?.length);
 
     loader.style.display = "none";
 
@@ -76,33 +80,43 @@ async function cargar() {
       <span class="meta">${fechaTxt}</span>
     `;
 
-    if (!data.farmacias.length) {
+    if (!data.farmacias || !data.farmacias.length) {
+      console.warn("SIN FARMACIAS");
       lista.innerHTML = "No hay farmacias disponibles";
       return;
     }
 
-    lista.innerHTML = data.farmacias.map(f => `
-      <div class="card">
-        <b>${f.nombre}</b><br>
-        ${f.direccion || ""} ${f.cp ? " - " + f.cp : ""}<br>
+    // 🔍 DEBUG de una farmacia
+    console.log("PRIMER ELEMENTO:", data.farmacias[0]);
 
-        ${f.telefono ? `
-          <a href="tel:${f.telefono}" class="tel">
-            📞 ${f.telefono}
-          </a><br>
-        ` : ""}
+    // ❗ IMPORTANTE: sin slice
+    lista.innerHTML = data.farmacias.map(f => {
+      console.log("RENDER:", f);
 
-        <span class="meta">${f.horario || "Guardia hoy hasta mañana"}</span><br>
+      return `
+        <div class="card">
+          <b>${f.nombre || "Farmacia"}</b><br>
+          ${f.direccion || ""} ${f.cp ? " - " + f.cp : ""}<br>
 
-        ${f.lat ? `
-          <a href="https://www.google.com/maps?q=${f.lat},${f.lon}" target="_blank">
-            📍 Ver mapa
-          </a>
-        ` : ""}
-      </div>
-    `).join("");
+          ${f.telefono ? `
+            <a href="tel:${f.telefono}" class="tel">
+              📞 ${f.telefono}
+            </a><br>
+          ` : ""}
+
+          <span class="meta">${f.horario || "Guardia hoy hasta mañana"}</span><br>
+
+          ${f.lat ? `
+            <a href="https://www.google.com/maps?q=${f.lat},${f.lon}" target="_blank">
+              📍 Ver mapa
+            </a>
+          ` : ""}
+        </div>
+      `;
+    }).join("");
 
   } catch (err) {
+    console.error("ERROR:", err);
     loader.innerText = "Error cargando datos";
   }
 }
