@@ -24,7 +24,7 @@ export default async function handler(req, res) {
         cp: e.codpostal,
         telefono: e.telefono,
         horario: e.horario,
-        lat: e.coordendas?.lat,
+        lat: e.coordenadas?.lat,
         lon: e.coordenadas?.lon
       }));
 	  
