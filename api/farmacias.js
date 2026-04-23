@@ -4,7 +4,7 @@ export default async function handler(req, res) {
 
   res.setHeader(
     "Cache-Control",
-    "s-maxage=3600, stale-while-revalidate"
+    "s-maxage=36, stale-while-revalidate"
   );
 
   try {
@@ -22,9 +22,9 @@ export default async function handler(req, res) {
         e.poblacion?.toLowerCase().includes("castell")
       )
       .map(e => ({
-        nombre: e.nombre_farmacia || e.nombre || "Farmacia",
+        nombre: e.rotulo || e.titular || e.nombre || e.razon_social || "Farmacia",
         direccion: e.direccion,
-        cp: e.codigo_postal,
+        cp: e.codigo_postal || e.cp,
         telefono: e.telefono,
         horario: e.horario,
         lat: e.geo_point_2d?.lat,
