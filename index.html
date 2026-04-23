@@ -94,11 +94,7 @@ async function cargar() {
       month: "long"
     });
 
-    subtitulo.innerHTML = `
-      Castellón de la Plana<br>
-      <span class="meta">${fechaTxt}</span>
-    `;
-	
+
 	document.querySelector(".fecha").innerText = fechaTxt;
 
     if (!data.farmacias || !data.farmacias.length) {
