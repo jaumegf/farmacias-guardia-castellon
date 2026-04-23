@@ -80,9 +80,10 @@ async function cargar() {
   try {
     const res = await fetch("/api/farmacias");
     const data = await res.json();
-
+	
     console.log("DATA COMPLETA:", data);
     console.log("TOTAL FARMACIAS:", data.farmacias?.length);
+	console.log(data.debug);
 
     loader.style.display = "none";
 

@@ -10,10 +10,6 @@ export default async function handler(req, res) {
   try {
     const response = await fetch(URL);
     const json = await response.json();
-	
-	
-	console.log("CAMPOS DISPONIBLES:", Object.keys(json.results[0]));
-	console.log("EJEMPLO COMPLETO:", json.results[0]);
 
     const hoy = new Date().toISOString().slice(0,10);
 
@@ -35,6 +31,7 @@ export default async function handler(req, res) {
     res.status(200).json({
       fecha: hoy,
       total: farmacias.length,
+	  debug: json.results[0],
       farmacias
     });
 
