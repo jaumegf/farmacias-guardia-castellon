@@ -66,10 +66,10 @@ h2 {
 <body>
 
 <h2>💊 Farmacias de guardia</h2>
-<div class="subtitulo">
-  <div class="ciudad">Castellón de la Plana</div>
-  <div class="fecha"></div>
-</div>
+<!-- <div class="subtitulo"> -->
+  <!-- <div class="ciudad">Castellón de la Plana</div> -->
+  <!-- <div class="fecha"></div> -->
+<!-- </div> -->
 
 <div id="loader">Cargando...</div>
 <div id="lista"></div>
@@ -95,8 +95,7 @@ async function cargar() {
       month: "long"
     });
 
-
-	document.querySelector(".fecha").innerText = fechaTxt;
+	//document.querySelector(".fecha").innerText = fechaTxt;
 
     if (!data.farmacias || !data.farmacias.length) {
       console.warn("SIN FARMACIAS");
@@ -124,8 +123,8 @@ async function cargar() {
 
           <span class="meta">${f.horario || "Guardia hoy hasta mañana"}</span><br>
 
-          ${f.lat ? `
-            <a href="https://www.google.com/maps?q=${f.lat},${f.lon}" target="_blank">
+          ${f.coordenadas.lat ? `
+            <a href="https://www.google.com/maps?q=${f.coordenadas.lat},${f.coordenadas.lon}" target="_blank">
               📍 Ver mapa
             </a>
           ` : ""}

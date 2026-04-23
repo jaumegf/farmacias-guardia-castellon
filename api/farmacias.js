@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
     const farmacias = json.results
       .filter(e =>
-        e.poblacion?.toLowerCase().includes("castell")
+        e.poblacion?.toLowerCase().includes("castelló")
       )
       .map(e => ({
         nombre: e.farmacia || "Farmacia",
