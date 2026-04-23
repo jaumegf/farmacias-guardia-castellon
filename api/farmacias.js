@@ -18,13 +18,14 @@ export default async function handler(req, res) {
         e.poblacion?.toLowerCase().includes("castell")
       )
       .map(e => ({
-        nombre: e.rotulo || e.titular || e.nombre || e.razon_social || "Farmacia",
+        nombre: e.farmacia || "Farmacia",
         direccion: e.direccion,
-        cp: e.codigo_postal || e.cp,
+		poblacion: e.poblacion,
+        cp: e.codpostal,
         telefono: e.telefono,
         horario: e.horario,
-        lat: e.geo_point_2d?.lat,
-        lon: e.geo_point_2d?.lon
+        lat: e.coordendas?.lat,
+        lon: e.coordenadas?.lon
       }));
 	  
 

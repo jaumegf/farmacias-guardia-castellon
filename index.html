@@ -115,7 +115,7 @@ async function cargar() {
         <div class="card">
           <b>${f.nombre || "Farmacia"}</b><br>
           ${f.direccion || ""} ${f.cp ? " - " + f.cp : ""}<br>
-
+		  ${f.poblacion}<br>
           ${f.telefono ? `
             <a href="tel:${f.telefono}" class="tel">
               📞 ${f.telefono}
