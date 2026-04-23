@@ -10,6 +10,10 @@ export default async function handler(req, res) {
   try {
     const response = await fetch(URL);
     const json = await response.json();
+	
+	
+	console.log("CAMPOS DISPONIBLES:", Object.keys(json.results[0]));
+	console.log("EJEMPLO COMPLETO:", json.results[0]);
 
     const hoy = new Date().toISOString().slice(0,10);
 
@@ -26,6 +30,7 @@ export default async function handler(req, res) {
         lat: e.geo_point_2d?.lat,
         lon: e.geo_point_2d?.lon
       }));
+	  
 
     res.status(200).json({
       fecha: hoy,

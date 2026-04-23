@@ -17,6 +17,22 @@ h2 {
   margin-bottom: 15px;
 }
 
+.subtitulo {
+  margin-bottom: 20px;
+}
+
+.ciudad {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #111827;
+}
+
+.fecha {
+  font-size: 0.85rem;
+  color: #6b7280;
+  text-transform: capitalize;
+}
+
 .card {
   background: white;
   border: 1px solid #e5e7eb;
@@ -50,7 +66,10 @@ h2 {
 <body>
 
 <h2>💊 Farmacias de guardia</h2>
-<div id="subtitulo"></div>
+<div class="subtitulo">
+  <div class="ciudad">Castellón de la Plana</div>
+  <div class="fecha"></div>
+</div>
 
 <div id="loader">Cargando...</div>
 <div id="lista"></div>
@@ -79,6 +98,8 @@ async function cargar() {
       Castellón de la Plana<br>
       <span class="meta">${fechaTxt}</span>
     `;
+	
+	document.querySelector(".fecha").innerText = fechaTxt;
 
     if (!data.farmacias || !data.farmacias.length) {
       console.warn("SIN FARMACIAS");
